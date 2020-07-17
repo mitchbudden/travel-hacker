@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import { filteredCardRef, cardRef } from "../firebase";
 import { connect } from "react-redux";
 
-class GoalItem extends Component {
-  completeGoal() {
+class CardItem extends Component {
+  completeCard() {
     const { email } = this.props.user;
-    const { title, serverKey } = this.props.goal;
+    const { title, serverKey } = this.props.card;
     cardRef.child(serverKey).remove();
     filteredCardRef.push({ email, title });
   }
 
   render() {
-    const { email, title } = this.props.goal;
+    const { email, title } = this.props.card;
     return (
       <div style={{ margin: "5px" }}>
         <strong>{title}</strong>
@@ -21,7 +21,7 @@ class GoalItem extends Component {
         </span>
         <button
           className="btn btn-sm btn-primary"
-          onClick={() => this.completeGoal()}
+          onClick={() => this.completeCard()}
         >
           Complete
         </button>
@@ -38,4 +38,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   null
-)(GoalItem);
+)(CardItem);

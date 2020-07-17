@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { cardRef } from "../firebase";
 import { connect } from "react-redux";
 
-class AddGoal extends Component {
+class AddCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,7 +10,7 @@ class AddGoal extends Component {
     };
   }
 
-  addGoal() {
+  addCard() {
     const { title } = this.state;
     const { email } = this.props.user;
     cardRef.push({ email, title });
@@ -22,7 +22,7 @@ class AddGoal extends Component {
         <div className="form-group">
           <input
             type="text"
-            placeholder="Add a goal"
+            placeholder="Add a Card"
             className="form-control"
             style={{ marginRight: "5px" }}
             onChange={event => this.setState({ title: event.target.value })}
@@ -30,7 +30,7 @@ class AddGoal extends Component {
           <button
             className="btn btn-success"
             type="button"
-            onClick={() => this.addGoal()}
+            onClick={() => this.addCard()}
           >
             Submit
           </button>
@@ -48,4 +48,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   null
-)(AddGoal);
+)(AddCard);

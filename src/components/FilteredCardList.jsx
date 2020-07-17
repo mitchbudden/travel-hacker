@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { filteredCardRef } from "../firebase";
 import { connect } from "react-redux";
-import { setCompleted } from "../actions";
+import { setFiltered } from "../actions";
 
-class CompleteGoalList extends Component {
+class FilteredCardList extends Component {
   componentDidMount() {
     filteredCardRef.on("value", snap => {
-      let completeGoals = [];
-      snap.forEach(completeGoal => {
-        const { email, title } = completeGoal.val();
-        completeGoals.push({ email, title });
+      let filteredCards = [];
+      snap.forEach(completeCard => {
+        const { email, title } = completeCard.val();
+        filteredCards.push({ email, title });
       });
-      this.props.setCompleted(completeGoals);
+      this.props.setFiltered(filteredCards);
     });
   }
 
@@ -22,8 +22,8 @@ class CompleteGoalList extends Component {
   render() {
     return (
       <div>
-        {this.props.completeGoals.map((completeGoal, index) => {
-          const { title, email } = completeGoal;
+        {this.props.filteredCards.map((completeCard, index) => {
+          const { title, email } = completeCard;
           return (
             <div key={index}>
               <strong>{title}</strong> completed by <em>{email}</em>
@@ -42,11 +42,11 @@ class CompleteGoalList extends Component {
 }
 
 function mapStateToProps(state) {
-  const { completeGoals } = state;
-  return { completeGoals };
+  const { filteredCards } = state;
+  return { filteredCards };
 }
 
 export default connect(
   mapStateToProps,
-  { setCompleted }
-)(CompleteGoalList);
+  { setFiltered }
+)(FilteredCardList);

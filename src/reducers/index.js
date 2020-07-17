@@ -1,10 +1,10 @@
-import { combineReducers } from 'redux';
-import user from './ReducerUser';
-import goals from './ReducerGoals';
-import completeGoals from './CompleteGoalsReducer';
+import { combineReducers } from "redux";
+import user from "./ReducerUser";
+import cards from "./ReducerCards";
+import filteredCards from "./FilteredCardsReducer";
 
 export default combineReducers({
-    user,
-    goals,
-    completeGoals
-})
+  user,
+  cards,
+  filteredCards
+});
